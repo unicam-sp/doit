@@ -1,0 +1,13 @@
+.input-container {
+  width: 100%;
+}
+
+.focused {
+  box-shadow: 0 0 0 1px #2684ff;
+}
+
+.selection-box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}

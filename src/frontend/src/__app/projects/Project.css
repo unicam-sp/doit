@@ -1,0 +1,127 @@
+
+.NewProjectButtonContainer {
+    text-align: center;
+}
+
+/* BUTTON ADD PROJECT */
+.Button {
+    width: 40px;
+    height: 40px;
+    margin: auto;
+    text-align: center;
+    background-color: white;
+    color: rgb(20, 220, 20);
+    border-radius: 30%;
+    outline: none;
+    border: 1px solid rgb(20, 220, 20);
+    font-size: 1.3em;
+}
+
+.Button:hover, .Button:focus {
+    cursor: pointer;
+    animation: pulse 1s;
+    box-shadow: 0 0 0 2em rgba(rgb(4, 253, 16),0);
+}
+
+@keyframes pulse {
+    0% {
+		transform: scale(0.95);
+		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+	}
+	70% {
+		transform: scale(1);
+		box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+	}
+	100% {
+		transform: scale(0.95);
+		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+	}
+}
+
+/* FORM */
+
+/*
+    div
+    align center center ->
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%);
+*/
+#FormBackground {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    width: 80%;
+    background-color: rgba(0, 0, 0, 0.904);
+    padding: 1.5%;
+    border-radius: 10px;
+    z-index: 1000;
+}
+
+#FormBackground.hide {
+    visibility: hidden;
+}
+
+#FormBackground.show {
+    visibility: visible;
+}
+
+/*
+    div -> button
+    horizontal alignment -> text-align: center;
+*/
+.FormContainer {
+}
+
+.FormContainer .buttonModificaEAnnulla {
+    font-size: 1rem;
+    padding: 0.5em;
+    margin: 10px;
+}
+
+/* REAL FORM */
+
+.Form .Label {
+    width: 100%;
+    margin: 5px;
+    display: inline-block;
+}
+
+.Form .Label p {
+    margin: 0;
+    padding: 0;
+    width: 20%;
+    float: left;
+}
+
+.Form .Label ul {
+    margin: 0;
+    padding: 0;
+    width: 80%;
+    float: left;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.Form .Label ul li {
+    margin: 0;
+    padding: 10px;
+    width: 80%;
+}
+
+.nomeCognome {
+    width: 70%;
+    float: left;
+}
+
+.Form .Label ul li button {
+    width: 20%;
+    float: left;
+}
+
+/* textarea for wordwrap */
+.Form .Label textarea[type=text] {
+    width: 50%;
+    float: left;
+}

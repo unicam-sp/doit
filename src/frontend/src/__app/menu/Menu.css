@@ -1,0 +1,32 @@
+#flyoutMenu {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    transition: transform .3s ease;
+    z-index: 1001;
+}
+
+#flyoutMenu.hide {
+    transform: translate3d(+100vw, 0, 0);
+}
+
+#flyoutMenu h2 a {
+    color: #333;
+    text-decoration: none;
+}
+
+.menuContent {
+    position: fixed;
+    right: 0;
+    background-color: #FFE600;
+    height: 100%;
+    width: 50%;
+    text-align: right;
+}
+
+.menuContent a {
+    margin: 0;
+    font-size: 1.5em;
+    display: list-item;
+}

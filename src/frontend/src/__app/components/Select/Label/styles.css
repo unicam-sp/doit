@@ -1,0 +1,9 @@
+.label {
+  font-size: 16px;
+  padding-top: 10px;
+  margin-right: 5px;
+  text-align: right;
+  display: inline-block;
+  white-space: nowrap;
+  min-width: 100px;
+}

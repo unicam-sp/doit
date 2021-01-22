@@ -1,0 +1,51 @@
+html {
+  height: 300%;
+}
+
+body {
+  margin:0;
+  padding:0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  background: linear-gradient(#141e30, #243b55);
+  color: white;
+}
+
+ul {
+  padding: 0;
+  background-color: rgba(0, 0, 0, 0.507);
+}
+
+a {
+  text-decoration: none;
+  margin-right: 5px;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  background-color: white;
+  color: black;
+}
+
+li {
+  padding: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.068);
+  list-style: none;
+}
+
+.contentStyles {
+  text-align: center;
+}
+
+.listNoStyle {
+  list-style: none;
+}
+
+.error {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: crimson;
+  text-align: center;
+}
