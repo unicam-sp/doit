@@ -2,7 +2,7 @@
     margin-bottom: 20px;
     width: 50px;
     height: 50px;
-    background-color: #96D9FF;
+    background-color: rgb(214, 252, 255);
     border-radius: 50%;
     border: 8px solid #0065A6;
     outline: none;
@@ -10,9 +10,9 @@
 }
 
 #roundButton:hover {
-    background-color: #96D9FF;
+    background-color: rgb(0, 238, 255);
     cursor: pointer;
-    border: 10px solid #003557;
+    border: 10px solid #003657e7;
     transform: scale(1.2, 1.2);
 }
 

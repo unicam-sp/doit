@@ -30,3 +30,11 @@
     font-size: 1.5em;
     display: list-item;
 }
+
+.loginSignin {
+    width: 100%;
+}
+
+.loginSignin a {
+    background-color: #ff3300;
+}

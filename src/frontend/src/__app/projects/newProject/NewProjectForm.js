@@ -16,7 +16,6 @@ class NewProjectForm extends Component {
 			visibility = "show";
 		}
 
-		// Comportamento simile al menu ma con effetto a comparsa invece che slide
 		return (
 			<div id="FormBackground"
 				className={visibility}>

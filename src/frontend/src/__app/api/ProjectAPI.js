@@ -1,7 +1,19 @@
 import axios from 'axios';
 
-export function getProjectByUserID(userID) {
+export function getStorefront() {
+    let config = {
+        url: 'http://localhost:8080/api/progetti/storefront',
+        method: 'get',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+    return axios(config)
+        .then(res => { return res.data })
+        .catch(err => { return Promise.reject(err) })
+}
 
+export function getProjectByUserID(userID) {
     let config = {
         url: 'http://localhost:8080/api/projects',
         method: 'get',
@@ -10,7 +22,6 @@ export function getProjectByUserID(userID) {
             'Content-Type': 'application/json'
         }
     }
-
     return axios(config)
         .then(res => { return res.data })
         .catch(err => { return Promise.reject(err) })

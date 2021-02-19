@@ -1,4 +1,5 @@
 import axios from 'axios';
+// import { getAllProperties, getEnumProperties } from "../Utils";
 
 export function getExperts() {
 
@@ -11,6 +12,26 @@ export function getExperts() {
     }
 
     return axios(config)
-        .then(res => { return res.data })
-        .catch(err => { return Promise.reject(err) })
 }
+
+/*
+return axios({
+        method: 'post',
+        url: 'http://localhost:8080/api/user/loadCv',
+        headers: {
+            'Content-Type': 'multipart/form-data',
+            'Authorization': 'Bearer ' + jwt
+        },
+        formData: formData
+    })
+*/
+
+/*
+    axios.post(url, {
+        //...data
+      }, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      })
+*/

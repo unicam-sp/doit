@@ -6,7 +6,7 @@ import "../Project.css"
 class ModifyProjectForm extends Component {
 
     constructor(props) {
-        super(props);
+        super(props)
 
         this.state = {
             id: props.projectSelected.id,
@@ -32,7 +32,10 @@ class ModifyProjectForm extends Component {
         getExperts()
             .then(arr => {
                 let output = []
-                arr.map(obj => {
+                arr.forEach((obj, index) => {
+                    console.log(obj.nome)
+                })
+                arr.forEach(obj => {
                     output.push({
                         key: obj.id,
                         value: obj.nome + " " + obj.cognome + " (" + obj.email + ")"
@@ -62,7 +65,6 @@ class ModifyProjectForm extends Component {
         }
         return true
     }
-
 
     handleChange(event) {
         event.preventDefault();
@@ -165,11 +167,14 @@ class ModifyProjectForm extends Component {
                                             )
                                     }
                                 </li>
-                                {this.state.selezionatori.map(sel =>
-                                    <li>
-                                        <div className="nomeCognome">{sel.nome} {sel.cognome}</div>
-                                        <button type="button" onClick={() => this.removeSelezionatore(sel)}>Rimuovi</button>
-                                    </li>)}
+                                {
+                                    this.state.selezionatori.forEach(sel => {
+                                        <li>
+                                            <div className="nomeCognome">{sel.nome} {sel.cognome}</div>
+                                            <button type="button" onClick={() => this.removeSelezionatore(sel)}>Rimuovi</button>
+                                        </li>
+                                    })
+                                }
                             </ul>
                         </div>
                     </form>

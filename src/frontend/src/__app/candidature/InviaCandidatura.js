@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { getRecruitersProject } from '../api/ProjectAPI'
-import ProjectCard from "../projects/ProjectCard";
 
 class InviaCandidatura extends Component {
 
