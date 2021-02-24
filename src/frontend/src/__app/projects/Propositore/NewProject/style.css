@@ -1,0 +1,37 @@
+/*
+    div
+    align center center ->
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%);
+*/
+.NewProjectForm {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.904);
+    
+    width: 80%;
+}
+
+.NewProjectForm textarea {
+    width: 80%;
+}
+
+.NewProjectForm button {
+    display: inline-block;
+    margin: 20px;
+    padding: 9px 15px;
+    font-size: 12px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    border: none;
+    border-radius: 15px;
+}
+
+.NewProjectForm button:hover, .NewProjectForm button:focus {
+    background-color: #cfcfcf
+}

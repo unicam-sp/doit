@@ -37,16 +37,12 @@ class Login extends Component {
                 if (res) {
                     if (res.status === 200) {
                         if (res.data) {
-                            // TODO save JWT in memory
                             this.setState({
-                                login_flag: true
+                                login_flag: true,
+                                error: ''
                             })
-                            this.props.setJwt(res.data)
+                            this.props.setJwt(res.data) // salvataggio del jwt in memoria
                         }
-                    }
-                    else {
-                        this.setState({ error: "" })
-                        console.log(res)
                     }
                 }
             })

@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 import it.unicam.doit.dao.DoitRoleDAO;
 import it.unicam.doit.dao.DoitUserDAO;
 import it.unicam.doit.dao.EspertoDAO;
+import it.unicam.doit.dao.PropositoreDAO;
 import it.unicam.doit.entity.DoitUser;
 import it.unicam.doit.entity.Esperto;
+import it.unicam.doit.entity.Propositore;
 import it.unicam.doit.model.DoitUserDetails;
 import it.unicam.doit.model.EnteSignUp;
 import it.unicam.doit.model.LoginUser;
@@ -55,6 +57,9 @@ public class AuthController {
 	@Autowired
 	private EspertoDAO espertoDAO;
 	
+	@Autowired
+	private PropositoreDAO propositoreDAO;
+	
 	/*
 		@return un json web token, oppure una eccezione
 		
@@ -82,18 +87,18 @@ public class AuthController {
 		// username, password, email, nome, cognome
 		String check = checkUsernamePasswordEmail(persona.getUsername(), persona.getPassword(), persona.getEmail());
 		if(!check.equals("")) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(check);
+		
 		if(persona.getNome().equals("None") || persona.getNome().equals("")) 
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("nome non valido");
 		if(persona.getCognome().equals("None") || persona.getCognome().equals("")) 
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("cognome non valido");
 				
-		Esperto user = new Esperto(
-				persona.getUsername(),
-				persona.getPassword(),
-				persona.getEmail(),
-				persona.getNome(),
-				persona.getCognome()
-				);
+		Esperto user = new Esperto();
+		user.setUsername(persona.getUsername());
+		user.setPassword(persona.getPassword());
+		user.setEmail(persona.getEmail());
+		user.setNome(persona.getNome());
+		user.setCognome(persona.getCognome());
 		
 		user.getRoles().add( doitRoleDAO.getOne(2) ); // USER
 		user.getRoles().add( doitRoleDAO.getOne(4) ); // PROGETTISTA
@@ -104,11 +109,27 @@ public class AuthController {
 	
 	@PostMapping(value = "signUpEnte")
 	public ResponseEntity<String> postSignUpEnte(@RequestBody EnteSignUp ente) throws Exception {
-		
-		// TODO cerca se l'username esiste gia'
 		// Ente = PROGETTISTA + PROPOSITORE
+		String check = checkUsernamePasswordEmail(ente.getUsername(), ente.getPassword(), ente.getEmail());
+		if(!check.equals("")) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(check);
 		
-		return null;
+		if(ente.getNomeEnte().equals("None") || ente.getNomeEnte().equals("")) 
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("nome non valido");
+		if(ente.getVATNumber().equals("None") || ente.getVATNumber().equals("")) 
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("cognome non valido");
+		
+		Propositore prop = new Propositore();
+		prop.setUsername(ente.getUsername());
+		prop.setPassword(ente.getPassword());
+		prop.setEmail(ente.getEmail());
+		prop.setNomeEnte(ente.getNomeEnte());
+		prop.setVATNumber(ente.getVATNumber());
+		
+		prop.getRoles().add( doitRoleDAO.getOne(2) ); // USER
+		prop.getRoles().add( doitRoleDAO.getOne(4) ); // PROGETTISTA
+		prop.getRoles().add( doitRoleDAO.getOne(3) ); // PROPOSITORE
+		propositoreDAO.save(prop);
+		return ResponseEntity.status(HttpStatus.CREATED).body("Nuovo ente creato!");
 	}
 	
 	private String checkUsernamePasswordEmail(String username, String password, String email) {

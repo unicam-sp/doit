@@ -27,6 +27,9 @@ public interface DoitUserDAO
 	@Query(value = "SELECT name FROM doit.user_role JOIN doit.role ON user_role.role_id = role.id WHERE user_role.user_id = :idUser", nativeQuery = true)
 	List<String> findRoleByUserID(@Param("idUser") int idUser);
 	
+	@Query(value = "SELECT username FROM doit.user WHERE doit.user.id = :id", nativeQuery = true)
+	String getUsernameById(@Param("id") int id);
+	
 }
 	
 	

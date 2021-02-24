@@ -1,16 +1,14 @@
-import axios from 'axios';
-// import { getAllProperties, getEnumProperties } from "../Utils";
+import axios from 'axios'
 
-export function getExperts() {
-
+export function getExperts(jwt) {
     let config = {
-        url: 'http://localhost:8080/api/experts',
+        url: 'http://localhost:8080/api/expert/',
         method: 'get',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${jwt}`
         }
     }
-
     return axios(config)
 }
 

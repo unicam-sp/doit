@@ -17,7 +17,7 @@ public class EnteSignUp {
 			@JsonProperty("password") String password,
 			@JsonProperty("email") String email,
 			@JsonProperty("nomeEnte") String nomeEnte,
-			@JsonProperty("cognome") String VATNumber) {
+			@JsonProperty("VATNumber") String VATNumber) {
 		this.username = username;
 		this.password = password;
 		this.email = email;

@@ -12,7 +12,6 @@ import Candidature from "./candidature/Candidature";
 import Signup from './loginSignup/Signup';
 import Login from "./loginSignup/Login";
 import './General.css';
-import jwt_decode from "jwt-decode";
 import UserPrivate from "./user/UserPrivate";
 import UserPublic from "./user/UserPublic";
 import Progettisti from "./progettisti/Progettisti";
@@ -30,20 +29,13 @@ class App extends Component {
 	}
 
 	setJwt(newJwt) {
-		console.log("jwt setted")
-		console.log(newJwt)
 		this.setState({
 			jwt: newJwt
 		})
 	}
 
 	render() {
-		if (this.state.jwt !== '') {
-			let decoded = jwt_decode(this.state.jwt);
-			console.log(decoded)
-			let decodedHeader = jwt_decode(this.state.jwt, { header: true });
-			console.log(decodedHeader);
-		} else console.log("jwt is empty")
+		if (this.state.jwt === '') console.log("jwt is empty")
 		return (
 			<div>
 				<Router>
@@ -57,7 +49,11 @@ class App extends Component {
 						/>
 						<Route path='/signup' component={Signup} />
 						<Route path='/storefront' component={Storefront} />
-						<Route path='/projects' component={Projects} />
+						<Route path='/projects'
+							render={(props) => (
+								<Projects {...props} key={Date.now()} jwt={this.state.jwt} />
+							)}
+						/>
 						<Route path='/candidature' component={Candidature} />
 						<Route path='/user/private'
 							render={(props) => (

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Redirect } from 'react-router-dom'
 import Form from "../components/Form/Form";
 import { postSignUpPersona, postSignUpEnte } from "../api/AuthAPI";
-import { getAllProperties, errHandling } from "../Utils";
+import { errHandling } from "../Utils";
 
 class Signin extends Component {
 
@@ -190,7 +190,7 @@ class Signin extends Component {
             handleChange: this.handleChange
         }, {
             type: 'button',
-            value: 'Registra Organizzazione',
+            value: 'Registra Ente',
             className: 'button',
             onClick: this.registrazioneEnte
         }]

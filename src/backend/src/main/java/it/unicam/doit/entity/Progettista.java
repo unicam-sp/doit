@@ -1,17 +1,32 @@
 package it.unicam.doit.entity;
 
-import javax.persistence.Entity;
+import java.util.HashSet;
+import java.util.Set;
 
-import lombok.AccessLevel;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.Setter;
 
 @Entity
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table (name = "progettista")
+@Getter
+@Setter
+@NoArgsConstructor
 public class Progettista extends DoitUser {
-
-	public Progettista(@NonNull String username, @NonNull String password, String email) {
-		super(username, password, email);
-	}
+	
+	@OneToMany(
+			targetEntity=Candidatura.class,
+			cascade = CascadeType.ALL, 
+            fetch = FetchType.LAZY, 
+            orphanRemoval = true)
+	@JoinColumn(name = "progettista_id")
+	private Set<Candidatura> candidature = new HashSet<>();
 
 }

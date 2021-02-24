@@ -1,0 +1,38 @@
+.Container {
+    text-align: center;
+}
+
+.CardsContainer {
+    text-align: center;
+}
+
+.FormBackground {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    width: 80%;
+
+    top: 10px;
+
+    background-color: rgba(0, 0, 0, 0.945);
+    text-align: center;
+}
+
+.Select {
+    display: block;
+    margin-bottom: 50px;
+}
+
+.FormBackground .Label {
+    width: 100%;
+    margin: auto;
+}
+
+.FormBackground .Label .Lista {
+    display: block;
+}
+
+.FormBackground .Label .Lista li {
+    display: flex;
+    justify-content: center;
+}

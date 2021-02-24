@@ -10,6 +10,13 @@ body {
   color: white;
 }
 
+/* some div are container */
+.container {
+  margin: auto;
+  width: 100%;
+  text-align: center;
+}
+
 ul {
   padding: 0;
   background-color: rgba(0, 0, 0, 0.507);
@@ -65,9 +72,18 @@ li {
 }
 
 .button {
-  padding: 3px;
+  display: inline-block;
+  margin: 20px;
+  padding: 9px 15px;
+  font-size: 1em;
+  cursor: pointer;
   text-align: center;
-  font-weight: bold;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 15px;
 }
 
 .button:hover {

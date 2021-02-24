@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import '../General.css';
 import { getStorefront } from "../api/ProjectAPI";
+import { errHandling } from "../Utils";
 
 class Storefront extends Component {
 
@@ -8,24 +9,22 @@ class Storefront extends Component {
         super();
 
         this.state = {
-            prova: ''
+            prova: '',
+            error: ''
         }
     }
 
     componentDidMount() {
         getStorefront()
-        .then(res => {
-            console.log(res);
-        })
-        .catch(err => {
-            console.log(err);
-        })
+        .then(res => { console.log(res) })
+        .catch(err => { this.setState({ error: errHandling(err) }) })
     }
 
     render() {
         return (
             <div className="contentStyles">
-                <h1>Vetrina</h1>
+                <h1>Vetrina di tutti i progetti completati</h1>
+                {this.state.error && <div className="error">{this.state.error}</div>}
             </div>
         )
     }

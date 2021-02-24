@@ -1,0 +1,18 @@
+.Button {
+    display: inline-block;
+    margin: 20px;
+    padding: 9px 15px;
+    font-size: 24px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 15px;
+}
+
+.Button:hover, .Button:focus {
+    background-color: #3e8e41
+}

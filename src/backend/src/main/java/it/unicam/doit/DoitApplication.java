@@ -33,16 +33,33 @@ public class DoitApplication {
 	@PostConstruct
 	public void populate() {
 		
-		Esperto e1 = new Esperto("user", "pass", "email", "Jak", "Red");
-		Propositore p1 = new Propositore("propositore", "password", "email", "nomeEnte", "VATNumber");
+		Esperto e1 = new Esperto();
+		// "user", "pwd", "email", "Jak", "Red"
+		e1.setNome("Jak");
+		e1.setCognome("Red");
+		e1.setUsername("user");
+		e1.setPassword("pwd");
+		e1.setEmail("email");
+		
+		Propositore p1 = new Propositore();
+		p1.setUsername("propositore");
+		p1.setPassword("pwd");
+		p1.setEmail("email");
+		p1.setNomeEnte("nome ente");
+		p1.setVATNumber("vat number");
 		
 		// se non salvo non esistera' l'istanza di e1 sulla tabella user
 		// quindi non sara' possibile usare il metodo getRoles()
 		espertoDAO.save(e1); 
 		propositoreDAO.save(p1);
 		
-		e1.getRoles().add( doitRoleDAO.getOne(2) );		
-		p1.getRoles().add( doitRoleDAO.getOne(2) );
+		e1.getRoles().add( doitRoleDAO.getOne(2) ); // USER
+		e1.getRoles().add( doitRoleDAO.getOne(4) ); // PROGETTISTA
+		e1.getRoles().add( doitRoleDAO.getOne(6) ); // ESPERTO
+		
+		p1.getRoles().add( doitRoleDAO.getOne(2) ); // USER
+		p1.getRoles().add( doitRoleDAO.getOne(4) ); // PROGETTISTA
+		p1.getRoles().add( doitRoleDAO.getOne(3) ); // PROPOSITORE
 		
 		espertoDAO.save(e1);
 		propositoreDAO.save(p1);

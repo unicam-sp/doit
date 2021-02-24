@@ -1,38 +1,63 @@
 import React, { Component } from 'react'
-import NewProjectContainer from './newProject/NewProjectContainer';
-import ModifyProject from './modifyProject/ModifyProject'
-import { getProjectByUserID } from '../api/ProjectAPI'
-import { errHandling } from "../Utils";
-import "../General.css";
+import jwt_decode from "jwt-decode"
+import { isEsperto, isProgettista } from "../Utils"
+import "../General.css"
+import ProgettiPropositore from "./Propositore/ProgettiPropositore"
+import ProgettiEsperto from "./Esperto/ProgettiEsperto"
+import FlashMessage from "../components/FlashMessage/FlashMessage";
+
+/*
+	- se propositore può creare progetti e vede i progetti su cui lavora
+	- se esperto può vedere i progetti su cui sta lavorando
+*/
 
 class Projects extends Component {
 
-	state = {
-		projects: [],
-		error: ''
+	constructor(props) {
+		super(props)
+
+		if (props.jwt !== '' && props.jwt !== undefined) {
+			let decoded = jwt_decode(props.jwt);
+
+			this.state = {
+				username: decoded.username,
+				isProgettista: isProgettista(decoded),
+				isEsperto: isEsperto(decoded),
+				file: null,
+				error: '',
+				projects: [],
+				message: ''
+			}
+		} else {
+			this.state = {
+				projects: [],
+				username: '',
+				login_error: 'Effettuare il login'
+			}
+		}
 	}
 
 	componentDidMount() {
-		getProjectByUserID("abbb5d2a-52c0-44bb-af14-39ba158edbec")
-			.then(projects => {
-				this.setState({ projects: projects })
-			})
-			.catch(err => {
-				this.setState({ error: errHandling(err) })
-			})
-	}
+        if (this.props.location.state) {
+            this.setState({
+                message: this.props.location.state.message
+            })
+        }
+    }
 
 	render() {
 		return (
 			<div>
-				{ this.state.error &&
-					<div className="error">{this.state.error}</div>
-				}
 				<div className="contentStyles">
-					<h1>Progetti</h1>
+					<h1>I tuoi progetti</h1>
+					<FlashMessage msg_from_parent={this.state.message} class={'msg'} />
+					{this.state.login_error && <div className="error">{this.state.login_error}</div>}
+					{this.state.error && <div className="error">{this.state.error}</div>}
 				</div>
-				<NewProjectContainer />
-				<ModifyProject projects={this.state.projects} />
+				{ // Propositore
+				this.state.isProgettista && <ProgettiPropositore username={this.state.username} jwt={this.props.jwt} />}
+				{ // Esperto
+				this.state.isEsperto && <ProgettiEsperto username={this.state.username}/>}
 			</div>
 		)
 	}

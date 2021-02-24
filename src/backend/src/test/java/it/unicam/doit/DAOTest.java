@@ -108,10 +108,17 @@ public class DAOTest {
 	private void propositoreDaoTest() {
 		System.out.println("\n --------------- INIZIO PROPOSITORE QUERY TEST --------------- ");
 		System.out.println("\n --------------- TEST CREA UTENTE PROPOSITORE COMPLETO --------------- ");
-		Propositore prop1 = new Propositore("username1", "sdasd", "email@gmail.com", "Nome Ente", "VAT Number");
-		prop1.getRoles().add(doitRoleDAO.getOne(2));
-		prop1.getRoles().add(doitRoleDAO.getOne(3));
-		propositoreDAO.save(prop1);
+		
+		Propositore p1 = new Propositore();
+		p1.setUsername("username1");
+		p1.setPassword("pwd");
+		p1.setEmail("email@gmail.com");
+		p1.setNomeEnte("nome ente");
+		p1.setVATNumber("vat number");
+		
+		p1.getRoles().add(doitRoleDAO.getOne(2)); // USER
+		p1.getRoles().add(doitRoleDAO.getOne(3)); // PROPOSITORE
+		propositoreDAO.save(p1);
 		System.out.println("\n --------------- FINE PROPOSITORE QUERY TEST --------------- ");
 	}
 
@@ -119,26 +126,43 @@ public class DAOTest {
 		System.out.println("\n --------------- INIZIO ESPERTO QUERY TEST --------------- ");
 
 		System.out.println("\n --------------- TEST ELIMINAZIONE A CASCATA CON RECORD GENITORE --------------- ");
-		espertoDAO.save(new Esperto("username1", "password", "email", "Giacomo", "Rossi"));
-		Esperto esperto = espertoDAO.findByUsername("username1");
+		
+		Esperto e1 = new Esperto();
+		e1.setNome("John");
+		e1.setCognome("Snow");
+		e1.setUsername("Corvo");
+		e1.setPassword("pwd");
+		e1.setEmail("email");
+		espertoDAO.save(e1);
+		Esperto esperto = espertoDAO.findByUsername("Corvo");
 		assertNotNull(esperto);
-		doitUserDAO.deleteByUsername("username1"); // cancello l'esperto dalla tabella user invece che dalla tabella esperto
-		Esperto query = espertoDAO.findByUsername("username1"); // cerco l'utente nella tabella esperto
+		doitUserDAO.deleteByUsername("Corvo"); // cancello l'esperto dalla tabella user invece che dalla tabella esperto
+		Esperto query = espertoDAO.findByUsername("Corvo"); // cerco l'utente nella tabella esperto
 		assertNull(query); // mi assicuro che la query non trovi nulla
 
 		System.out.println("\n --------------- TEST ELIMINAZIONE UTENTI SENZA RUOLO --------------- ");
 		
-		Propositore prop1 = new Propositore("username2", "password", "email", "nomeEnte", "VATNumber");
-		prop1.getRoles().add(doitRoleDAO.getOne(2)); // USER
-		prop1.getRoles().add(doitRoleDAO.getOne(3)); // PROPOSITORE
-		prop1.getRoles().add(doitRoleDAO.getOne(4)); // PROGETTISTA
-		propositoreDAO.save(prop1);
+		Propositore p1 = new Propositore();
+		p1.setUsername("username2");
+		p1.setPassword("pwd");
+		p1.setEmail("email@gmail.com");
+		p1.setNomeEnte("nome ente");
+		p1.setVATNumber("vat number");
+		p1.getRoles().add(doitRoleDAO.getOne(2)); // USER
+		p1.getRoles().add(doitRoleDAO.getOne(3)); // PROPOSITORE
+		p1.getRoles().add(doitRoleDAO.getOne(4)); // PROGETTISTA
+		propositoreDAO.save(p1);
 		
-		Esperto esp1 = new Esperto("username6", "password", "email", "Giacomo", "Rossi");
-		esp1.getRoles().add( doitRoleDAO.getOne(2) ); // USER
-		esp1.getRoles().add( doitRoleDAO.getOne(4) ); // PROGETTISTA
-		esp1.getRoles().add( doitRoleDAO.getOne(6) ); // ESPERTO
-		espertoDAO.save(esp1);
+		Esperto e2 = new Esperto();
+		e2.setNome("John");
+		e2.setCognome("Snow");
+		e2.setUsername("Corvo");
+		e2.setPassword("pwd");
+		e2.setEmail("email");
+		e2.getRoles().add( doitRoleDAO.getOne(2) ); // USER
+		e2.getRoles().add( doitRoleDAO.getOne(4) ); // PROGETTISTA
+		e2.getRoles().add( doitRoleDAO.getOne(6) ); // ESPERTO
+		espertoDAO.save(e2);
 
 		printTableStatus();
 		
@@ -153,7 +177,7 @@ public class DAOTest {
 			}
 		}
 		
-		assertEquals(3, doitUserDAO.count()); // esp1, prop1, admin
+		assertEquals(6, doitUserDAO.count()); // admin, user, propositore, username1, username2, Corvo
 		System.out.println("\n --------------- FINE ESPERTO QUERY TEST --------------- ");
 	}
 

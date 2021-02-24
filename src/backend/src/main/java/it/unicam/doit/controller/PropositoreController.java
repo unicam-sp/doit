@@ -31,7 +31,7 @@ public class PropositoreController {
 
 		}
 	    
-	    return "Ciao bello";
+	    return "test per leggere i parametri della request";
 	}
 
 }

@@ -1,29 +1,28 @@
 package it.unicam.doit.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import it.unicam.doit.entity.Esperto;
+import it.unicam.doit.dao.EspertoDAO;
 
 @RestController
+@RequestMapping(value = "/api/expert/")
 public class EspertoController {
 
-	// Il logger e' integrato in spring boot
 	private final static Logger LOG = LoggerFactory.getLogger(EspertoController.class);
+	
+	@Autowired
+	private EspertoDAO espertoDAO;
 
-	@GetMapping("/api/experts")
-	public List<Esperto> getEsperti(@RequestHeader Map<String, String> headers) {
-
-		// legge UserID
-		// controlla che ruoli ha
-		// fa chiamata al database per ottenere gli esperti
-		return null;
+	@GetMapping("")
+	public List<String> getEsperti() {
+		return espertoDAO.findAllExpertsUsername(); // serialize loop
 	}
 
 }

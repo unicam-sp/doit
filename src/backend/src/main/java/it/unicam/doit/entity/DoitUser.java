@@ -19,6 +19,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -35,11 +36,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @RequiredArgsConstructor
+@NoArgsConstructor
 public class DoitUser {
-	
-	DoitUser() {
-		this.email = "";	
-	}
 	
 	// @Column(name = "id", unique = true, nullable = false)
 	@Id
@@ -57,7 +55,7 @@ public class DoitUser {
 	
 	@NonNull
 	@Column
-	final private String email;
+	private String email;
 	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(

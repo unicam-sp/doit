@@ -1,48 +1,67 @@
 package it.unicam.doit.entity;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+
+@Entity
+@Table(name = "progetto")
+@Getter
+@Setter
+@RequiredArgsConstructor
+@NoArgsConstructor
 public class Progetto {
 
-	private UUID projID;
-	private UUID propositoreID;
-	private List<Esperto> selezionatori;
-	private List<UUID> candidature;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(columnDefinition = "MEDIUMINT NOT NULL AUTO_INCREMENT")
+	private Integer id;
 
+	@NonNull
+	private Integer propositoreId;
+
+	@NonNull
 	private String titolo;
+
+	@NonNull
 	private String descrizione;
+
+	@NonNull
 	private String requisiti;
 
-	public void addSelezionatore(Esperto selezionatore) throws Exception {
-		if (Objects.isNull(selezionatore))
-			throw new Exception("Recruiter can't be empty");
-		this.selezionatori.add(selezionatore);
-	}
+	@Enumerated
+	@NonNull
+	private StatoProgetto stato;
 
-	public List<Esperto> getSelezionatori() {
-		return selezionatori;
-	}
-
-	public UUID getId() {
-		return projID;
-	}
-
-	public UUID getPropositoreID() {
-		return propositoreID;
-	}
-
-	public String getTitolo() {
-		return titolo;
-	}
-
-	public String getDescrizione() {
-		return descrizione;
-	}
-
-	public String getRequisiti() {
-		return requisiti;
-	}
+	@OneToMany(
+			targetEntity=Candidatura.class,
+			cascade = CascadeType.ALL, 
+            fetch = FetchType.LAZY)
+	@JoinColumn(name = "progetto_id")
+	private Set<Candidatura> candidature = new HashSet<>();
+	
+	@OneToMany(
+			targetEntity=Selezionatore.class,
+			cascade = CascadeType.ALL, 
+            fetch = FetchType.LAZY)
+	@JoinColumn(name = "progetto_id")
+	private Set<Selezionatore> selezionatori = new HashSet<>();
 
 }

@@ -14,11 +14,11 @@ export function loadFile(jwt, file) {
             'Authorization': `Bearer ${jwt}`
         }
     })
-        .then(res => console.log(res))
-        .catch(err => {
-            getAllProperties(err)
-            getEnumProperties(err)
-        })
+    .then(res => console.log(res))
+    .catch(err => {
+        getAllProperties(err)
+        getEnumProperties(err)
+    })
 }
 
 export function getUsernamesWithProfile(jwt) {

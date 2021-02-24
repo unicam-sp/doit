@@ -52,7 +52,11 @@ public class DoitConfiguration extends WebSecurityConfigurerAdapter {
 		// quando dal client viene fatta una richiesta che non rispetta le policy cors
 		// viene inviato prima una richiesta di tipo OPTIONS che deve essere lasciata passare
 		.antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-		.antMatchers("/api/auth/login").permitAll()
+		.antMatchers("/").permitAll()
+		.antMatchers("/static/**").permitAll()
+		.antMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
+		.antMatchers(HttpMethod.POST, "/api/auth/signUpPersona").permitAll()
+		.antMatchers(HttpMethod.POST, "/api/auth/signUpEnte").permitAll()
 		.anyRequest().authenticated();
 
 		// impostazione per dire a Spring di non creare delle sessioni per gli utenti

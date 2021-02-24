@@ -3,7 +3,7 @@ import jwt_decode from "jwt-decode"
 import "./style.css";
 import TextAreaAutoSize from "../components/TextAreaAutoSize/TextAreaAutoSize";
 import { loadFile } from "../api/ProfiloAPI";
-// import { getAllProperties, getEnumProperties } from "../Utils";
+import { isProgettista, isEsperto } from "../Utils";
 
 /*
 	- possibilita' di caricare il CV
@@ -13,13 +13,15 @@ import { loadFile } from "../api/ProfiloAPI";
 class UserPrivate extends Component {
 
 	constructor(props) {
-		super(props);
+		super(props)
 
 		if (props.jwt !== '' && props.jwt !== undefined) {
 			let decoded = jwt_decode(props.jwt);
 
 			this.state = {
 				username: decoded.username,
+				isProgettista: isProgettista(decoded),
+				isEsperto: isEsperto(decoded),
 				file: null,
 				error: ''
 			}
@@ -67,7 +69,9 @@ class UserPrivate extends Component {
 					) : (
 							<div>
 								<div className="fileuploader">
-									<input type="file" onChange={this.handleFileInput} accept='application/pdf'/>
+									{ this.state.isEsperto && <input type="file" onChange={this.handleFileInput} accept='application/pdf'/>
+									}
+									Informazioni che appariranno nel profilo pubblico:
 									<TextAreaAutoSize />
 									<button onClick={e => this.save(e)} className="button">
 										salva modifiche
